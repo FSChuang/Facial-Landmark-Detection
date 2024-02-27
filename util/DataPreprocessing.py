@@ -15,10 +15,10 @@ class Preprocessor:
                  crop_offset):
         
         self.image_dim = image_dim
-        
-        self.landmarks_augmentation = LandmarksAugmentation(image_dim, angle)
-        self.face_augmentation = FaceAugmentation(image_dim, brightness, contrast, saturation, hue, face_offset, crop_offset)
 
+        self.landmarks_augmentation = LandmarksAugmentation(angle)
+        self.face_augmentation = FaceAugmentation(image_dim, brightness, contrast, saturation, hue, face_offset, crop_offset)
+    
     def __call__(self, image, landmarks, crops_coordinates):
         image = TF.to_pil_image(image)
 
@@ -34,5 +34,5 @@ class Preprocessor:
 
         image = (image - image.min())/(image.max() - image.min())
         image = (2 * image) - 1
-        
+
         return image, torch.FloatTensor(landmarks.reshape(-1) - 0.5)

@@ -3,19 +3,20 @@ import numpy as np
 import torchvision.transforms.functional as TF
 
 class FaceAugmentation:
-    def __init__(self, 
+    def __init__(self,
                  image_dim,
-                 brightness,
+                 brightness,    
                  contrast,
                  saturation,
                  hue,
                  face_offset,
                  crop_offset):
+        
         self.image_dim = image_dim
         self.face_offset = face_offset
         self.crop_offset = crop_offset
         self.transform = transforms.ColorJitter(brightness, contrast, saturation, hue)
-
+    
     def offset_crop(self, image, landmarks, crops_coordinates):
         left = int(crops_coordinates['left']) - self.face_offset
         top = int(crops_coordinates['top']) - self.face_offset
@@ -38,7 +39,7 @@ class FaceAugmentation:
         image = np.array(image)
 
         h, w = image.shape[:2]
-        
+
         top = np.random.randint(0, h - self.image_dim)
         left = np.random.randint(0, w - self.image_dim)
 
@@ -63,7 +64,7 @@ class LandmarksAugmentation:
     def random_rotation(self, image, landmarks):
         angle = np.random.uniform(-self.rotation_limit, self.rotation_limit)
         landmarks_transformation = np.array([
-            [+np.cos(np.radians(angle)), -np.sin(np.radians(angle))],
+            [+np.cos(np.radians(angle)), -np.sin(np.radians(angle))], 
             [+np.sin(np.radians(angle)), +np.cos(np.radians(angle))]
         ])
         image = TF.rotate(image, angle)
@@ -75,5 +76,4 @@ class LandmarksAugmentation:
     
     def __call__(self, image, landmarks):
         image, landmarks = self.random_rotation(image, landmarks)
-
         return image, landmarks
