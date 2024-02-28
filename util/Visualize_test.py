@@ -1,5 +1,5 @@
-from Visualize import visualize_image, visualize_batch, preprocessor
-from Dataset import LandmarksDataset
+from .Visualize import visualize_image, visualize_batch, preprocessor
+from .Dataset import LandmarksDataset
 from torch.utils.data import random_split
 import torch
 

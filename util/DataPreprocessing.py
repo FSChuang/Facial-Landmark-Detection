@@ -1,4 +1,4 @@
-from Augmentation import FaceAugmentation, LandmarksAugmentation
+from .Augmentation import FaceAugmentation, LandmarksAugmentation
 import numpy as np
 import torchvision.transforms.functional as TF
 import torch

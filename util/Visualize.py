@@ -1,7 +1,6 @@
 from matplotlib import pyplot as plt
 from mpl_toolkits.axes_grid1 import ImageGrid
-from DataPreprocessing import Preprocessor
-from Dataset import LandmarksDataset
+from .DataPreprocessing import Preprocessor
 import numpy as np
 
 preprocessor = Preprocessor(
