@@ -2,6 +2,7 @@ from matplotlib import pyplot as plt
 from mpl_toolkits.axes_grid1 import ImageGrid
 from .DataPreprocessing import Preprocessor
 import numpy as np
+import time
 
 preprocessor = Preprocessor(
     image_dim = 128,
@@ -44,4 +45,7 @@ def visualize_batch(images_list, landmarks_list, size = 14, shape = (6, 6), titl
         print(title)
     if save:
         plt.savefig(save)
-    plt.show()
+    plt.show(block = False)
+    plt.pause(1)
+    plt.close('all')
+

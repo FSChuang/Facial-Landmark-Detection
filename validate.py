@@ -11,9 +11,9 @@ def validate(model, val_data, save = None):
 
     model.eval()
 
-    for features, labels in tqdm(val_data, desc = 'Validating', ncols = 600):
-        #features = features.cuda()
-        #labels = labels.cuda()
+    for features, labels in tqdm(val_data, desc = 'Validating', ncols = 600, bar_format='{l_bar}{bar:100}{r_bar}{bar:-100b}'):
+        features = features.cuda()
+        labels = labels.cuda()
 
         outputs = model(features)
 
@@ -23,6 +23,7 @@ def validate(model, val_data, save = None):
 
         break
 
-    util.Visualize.visualize_batch(features[:16], outputs[:16], shape = (4,4), size = 16, title = 'Validation')
+    util.Visualize.visualize_batch(features[:16].cpu(), outputs[:16].cpu(), shape = (4,4), size = 16, title = 'Validation')
+
 
     return cum_loss/len(val_data)
