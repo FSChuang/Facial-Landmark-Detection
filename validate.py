@@ -23,7 +23,7 @@ def validate(model, val_data, save = None):
 
         break
 
-    util.Visualize.visualize_batch(features[:16].cpu(), outputs[:16].cpu(), shape = (4,4), size = 16, title = 'Validation')
+    util.Visualize.visualize_batch(features[:16].cpu(), outputs[:16].cpu(), shape = (4,4), size = 16, title = 'Validation', save = save)
 
 
     return cum_loss/len(val_data)

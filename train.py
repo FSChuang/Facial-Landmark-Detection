@@ -50,6 +50,12 @@ model = model.cuda()
 objective = nn.MSELoss()
 optimizer = optim.Adam(model.parameters(), lr = 0.0008)
 
+#create directory for storing the progress(gif form)
+if os.path.isdir('progress'):
+    os.remove('progress')
+os.mkdir('progress')
+
+#Start training the model
 epochs = 30
 batches = len(train_data)
 best_loss = np.inf
