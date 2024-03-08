@@ -47,6 +47,6 @@ def visualize_batch(images_list, landmarks_list, size = 14, shape = (6, 6), titl
         plt.savefig(save)
         
     plt.show(block = False)
-    plt.pause(1)
+    plt.pause(5)
     plt.close('all')
 

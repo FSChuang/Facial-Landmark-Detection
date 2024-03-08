@@ -35,7 +35,7 @@ class EntryBlock(nn.Module):
             nn.LeakyReLU(0.2),
             DepthwiseSeperableConv2d(64, 128, 3, padding = 1),
             nn.BatchNorm2d(128),
-            nn.MaxPool2d(3, stride = 2, padding = 1)
+            nn.MaxPool2d(3, stride = 2, padding = 1),
         )
 
         self.conv3_direct = nn.Sequential(
@@ -55,7 +55,7 @@ class EntryBlock(nn.Module):
 
         self.conv4_direct = nn.Sequential(
             nn.Conv2d(128, 256, 1, stride = 2),
-            nn.BatchNorm2d(256)
+            nn.BatchNorm2d(256),
         )
 
     def forward(self, x):
@@ -65,11 +65,11 @@ class EntryBlock(nn.Module):
         residual = self.conv3_residual(x)
         direct = self.conv3_direct(x)
         x = residual + direct
-
+        
         residual = self.conv4_residual(x)
         direct = self.conv4_direct(x)
         x = residual + direct
-            
+
         return x
 
 class MiddleBasicBlock(nn.Module):
@@ -79,12 +79,13 @@ class MiddleBasicBlock(nn.Module):
         self.conv1 = nn.Sequential(
             nn.LeakyReLU(0.2),
             DepthwiseSeperableConv2d(256, 256, 3, padding = 1),
-            nn.BatchNorm2d (256)
+            nn.BatchNorm2d(256)
         )
 
         self.conv2 = nn.Sequential(
             nn.LeakyReLU(0.2),
-            DepthwiseSeperableConv2d(256, 256, 3, padding = 1)
+            DepthwiseSeperableConv2d(256, 256, 3, padding = 1),
+            nn.BatchNorm2d(256)
         )
 
         self.conv3 = nn.Sequential(
@@ -141,13 +142,13 @@ class ExitBlock(nn.Module):
 
         self.dropout = nn.Dropout(0.3)
 
-        self.avgpool = nn. AdaptiveAvgPool2d((1, 1))
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
 
     def forward(self, x):
         direct = self.direct(x)
         residual = self.residual(x)
         x = direct + residual
-
+        
         x = self.conv(x)
         x = self.avgpool(x)
         x = self.dropout(x)
@@ -176,5 +177,3 @@ class XceptionNet(nn.Module):
         return x
      
 
-model = XceptionNet()
-#model.cuda()

@@ -19,8 +19,8 @@ sys.path.append(parent_dir)
 from model.model import XceptionNet
 
 model = XceptionNet().cuda()
-state_dict = torch.load("model.pt")
-model.load_state_dict(torch.load('model.pt', map_location='cpu'))
+#state_dict = torch.load("model.pt")
+model.load_state_dict(torch.load('model_0020.pt', map_location='cpu'))
 
 def preprocess_image(image):
     image = TF.to_pil_image(image)
@@ -28,16 +28,16 @@ def preprocess_image(image):
     image = TF.to_tensor(image)
     image = (image - image.min())/(image.max() - image.min())
     image = (2 * image) - 1
-    print(image.size())
+    #print(image.size())
     return image.unsqueeze(0)
 
 def draw_landmarks_on_faces(image, faces_landmarks):
     image = image.copy()
     for landmarks, (left, top, height, width) in faces_landmarks:
         landmarks = landmarks.view(-1, 2)
-        landmarks = (landmarks + 0.5)
-        landmarks[:, 0] = (landmarks[:, 0] - landmarks[:, 0].min()) / (landmarks[:, 0].max() - landmarks[:, 0].min())
-        landmarks[:, 1] = (landmarks[:, 1] - landmarks[:, 1].min()) / (landmarks[:, 1].max() - landmarks[:, 1].min())
+        landmarks = (landmarks*0.9 + 0.5)
+        #landmarks[:, 0] = (landmarks[:, 0] - landmarks[:, 0].min()) / (landmarks[:, 0].max() - landmarks[:, 0].min())
+        #landmarks[:, 1] = (landmarks[:, 1] - landmarks[:, 1].min()) / (landmarks[:, 1].max() - landmarks[:, 1].min())
         landmarks = landmarks.numpy()
         
         for i, (x, y) in enumerate(landmarks, 1):
@@ -93,7 +93,7 @@ def output_video(video, name, seconds = None):
     return outputs
 
 if __name__ == '__main__':
-    video = VideoFileClip("application/video/meme3.mp4")
+    video = VideoFileClip("application/video/meme2.mp4")
     print('FPS: ', video.fps)
     print('Duration: ', video.duration, 'seconds')
 
@@ -101,7 +101,7 @@ if __name__ == '__main__':
         break
 
     
-    outputs = output_video(video, "video_output/Meme3 Face Detection")
+    outputs = output_video(video, "video_output/Meme2_0020 Face Detection")
     plt.figure(figsize = (11, 11))
     plt.imshow(outputs[10])
 
