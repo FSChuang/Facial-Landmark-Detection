@@ -20,7 +20,7 @@ from model.model import XceptionNet
 
 model = XceptionNet().cuda()
 #state_dict = torch.load("model.pt")
-model.load_state_dict(torch.load('model_0020.pt', map_location='cpu'))
+model.load_state_dict(torch.load('model.pt', map_location='cpu'))
 
 def preprocess_image(image):
     image = TF.to_pil_image(image)
@@ -93,7 +93,7 @@ def output_video(video, name, seconds = None):
     return outputs
 
 if __name__ == '__main__':
-    video = VideoFileClip("application/video/meme2.mp4")
+    video = VideoFileClip("application/video/Elon.mp4")
     print('FPS: ', video.fps)
     print('Duration: ', video.duration, 'seconds')
 
@@ -101,7 +101,7 @@ if __name__ == '__main__':
         break
 
     
-    outputs = output_video(video, "video_output/Meme2_0020 Face Detection")
+    outputs = output_video(video, "video_output/Elon_0016 Face Detection")
     plt.figure(figsize = (11, 11))
     plt.imshow(outputs[10])
 
