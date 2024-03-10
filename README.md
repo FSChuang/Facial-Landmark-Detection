@@ -10,7 +10,12 @@
 <p align = "center"> paper:
   <a href="https://arxiv.org/abs/2401.13601](https://ibug.doc.ic.ac.uk/media/uploads/documents/sagonas_iccv_2013_300_w.pdf">300W</a> </p>
 <p align = "center"><img width = "600px" src="https://github.com/FSChuang/Facial-Landmark-Detection/assets/124766162/355c434e-a391-4f97-95fb-2c1e94061695"/></p>
-The 300-W is a face dataset that consists of 300 Indoor and 300 Outdoor in-the-wild images. It covers a large variation of identity, expression, illumination conditions, pose, occlusion and face size. Images were annotated with the 68-point mark-up. <br/>
+The 300-W is a face dataset that consists of 300 Indoor and 300 Outdoor in-the-wild images. It covers a large variation of identity, expression, illumination conditions, pose, occlusion and face size. Images were annotated with the 68-point mark-up. <br/></br>
+
+Download the dataset in linux or using windows powershell:
+```linux
+!wget http://dlib.net/files/data/ibug_300W_large_face_landmark_dataset.tar.gz
+```
 
 ## <a name = "data-preprocessing"> Data Preprocessing
 To increase the variety of data set and improve the performance of the model, apply augmentation on the input data including:
